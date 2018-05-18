@@ -25,3 +25,10 @@ You are free to link or use RI inside source code of your own program. If do so,
      """Bonnici, V., Giugno, R., Pulvirenti, A., Shasha, D., & Ferro, A. (2013).
      A subgraph isomorphism algorithm and its application to biochemical data. 
      BMC bioinformatics, 14(7), S13.
+
+<hr />
+
+### References
+ if you have used any of the RI project software, please cite the following paper:
+ 
+Vincenzo Bonnici, Rosalba Giugno, Alfredo Pulvirenti, Dennis Shasha and Alfredo Ferro. A subgraph isomorphism algorithm and its application to biochemical data. BMC Bioinformatics 2013, 14(Suppl 7):S13 doi:10.1186/1471-2105-14-S7-S13.
