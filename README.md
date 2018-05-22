@@ -37,7 +37,7 @@ All versions of RI take in input the same parameters:
 |geu	|undirected graphs with attributes both on nodes and edges.|
 |vfu	|Sansone et al. file format for labeled directed graphs with attributes only on nodes.|
 
-###### Query extractor
+##### Query extractor
 
 Before using the query extractor tool please rebuilt it by make -B querygen
 ```
@@ -50,7 +50,7 @@ You can set the number_of_nodes or number_of_edges to -1 to do not specify them.
 Note that if the input parameters do not reflect the properties of the input_graph you can obtain an unwanted resulting subgraph. So, the extractor tries first to generate a graph with the specified number of edges and the maximum possible number of nodes near to the input value. This does not exclude that a subgraph with the specified number of edges will be extracted.
 
 
-###### FocusSearch-C++
+##### FocusSearch-C++
 Before use the FocusSearch-C++ command line interface of all distributions, please rebuilt it by make -B
 The tool usage is:
 
@@ -68,7 +68,7 @@ The tool usage is:
 |gfu	|undirected graphs with attributes only on nodes.|
 |vfu| Sansone et al. file format for labeled directed graphs with attributes only on nodes.|
 
-###### Default graph file format
+##### Default graph file format
 
 The RI project provides two graph file format gfu and gfd, respectively for undirected and directed graphs with attributes only on nodes.
 
