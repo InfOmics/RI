@@ -1,4 +1,5 @@
 # RI
+***Version: 3.6***
 > RI is a general purpose algorithm for one-to-one exact subgraph isomorphism problem maintaining topological constraints. 
 
 <hr />
