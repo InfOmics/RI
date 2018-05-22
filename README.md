@@ -16,6 +16,110 @@ Please send us an email to get software sources or datasets (see Contacts).
 
 <hr />
 
+### Usage
+##### RI - CLI (Command Line Interface)
+Before usinf the RI command line interface of all distributions, please rebuilt it by make -B
+All versions of RI take in input the same parameters:
+```
+ ./ri ISO_TYPE INPUT_FORMAT target_graph pattern_graph    
+```
+|ISO_TYPE|specify isomorphism|
+|---------|-------------------|
+|iso|bijective graphs isomorphism.|
+|ind|induced subgraph isomorphism|
+|mono|monomorphism, the classical subgraph matching|
+
+|INPUT_FORMAT	| specify input file format|
+|----------------|-------------------------|
+|gfd	|directed graphs with attributes only on nodes.|
+|gfu	|undirected graphs with attributes only on nodes.|
+|ged	|directed graphs with attributes both on nodes and edges.|
+|geu	|undirected graphs with attributes both on nodes and edges.|
+|vfu	|Sansone et al. file format for labeled directed graphs with attributes only on nodes.|
+
+###### Query extractor
+
+Before using the query extractor tool please rebuilt it by make -B querygen
+```
+./querygen [gfu gfd] input_graph number_of_nodes number_of_edges output_file number_of_queries
+```
+The query extractor tries to extract a total amount of number_of_queries subgraphs, from the given input_graph, with the specified number_of_nodes and number_of_edges, saving them at the specified output prefix output_file.
+
+You can set the number_of_nodes or number_of_edges to -1 to do not specify them. For example, let the number_of_edges fixed to a value and the number_of_nodes set to the -1, than the extractor tries to extract a subgraph just with the given number of edges not caring the number of nodes. You can also set number_of_nodes to a decimal value between 0 and 1 to specify it as a percentage of the number_of_edges.
+
+Note that if the input parameters do not reflect the properties of the input_graph you can obtain an unwanted resulting subgraph. So, the extractor tries first to generate a graph with the specified number of edges and the maximum possible number of nodes near to the input value. This does not exclude that a subgraph with the specified number of edges will be extracted.
+
+
+###### FocusSearch-C++
+Before use the FocusSearch-C++ command line interface of all distributions, please rebuilt it by make -B
+The tool usage is:
+
+```
+./fsearch ISO_TYPE INPUT_FORMAT target_graph pattern_graph
+```
+
+|ISO_TYPE|specify isomorphism|
+|---------------|------------|
+|mono|monomorphism, the classical subgraph matching|
+
+|INPUT_FORMAT|	specify input file format|
+|---------------|------------|
+|gfd	|directed graphs with attributes only on nodes.|
+|gfu	|undirected graphs with attributes only on nodes.|
+|vfu| Sansone et al. file format for labeled directed graphs with attributes only on nodes.|
+
+###### Default graph file format
+
+The RI project provides two graph file format gfu and gfd, respectively for undirected and directed graphs with attributes only on nodes.
+
+Graphs are stored in text files containing one or more items.
+The current input format allows the description of undirect graphs with labels on nodes.
+> #[graph_name] <br>
+[number of nodes] <br>
+[label_of_first_node] <br>
+[label_of_second_node] <br>
+... <br>
+[number of edges] <br>
+[node id] [node id] <br>
+[node id] [node id] <br>
+... <br>
+
+Node ids are assigned following the order in which they are written in the input file, starting from 0.
+***[graph_name] and labels can not contain blank characters (spaces).
+Labels are case sensitive.***
+
+An example of input file is the following:
+
+> #my_graph <br>
+4 <br>
+A <br>
+B <br>
+C <br>
+Br <br>
+5 <br>
+0 1 <br>
+2 1 <br>
+2 3 <br>
+0 3 <br>
+0 2 <br>
+
+
+Indeed, an example of input file in geu format (undirected graph with labels both on nodes and attibutes) is:
+> #my_graph <br>
+4 <br>
+A <br>
+B <br>
+C <br>
+Br <br>
+5 <br>
+0 1 a <br>
+2 1 n<br>
+2 3 m<br>
+0 3 k<br>
+0 2 a<br>
+
+<hr />
+
 ### License
 RI is distributed under the MIT license. This means that it is free for both academic and commercial use. Note however that some third party components in RI require that you reference certain works in scientific publications.
 You are free to link or use RI inside source code of your own program. If do so, please reference (cite) RI and this website. We appreciate bug fixes and would be happy to collaborate for improvements. 
@@ -23,7 +127,7 @@ You are free to link or use RI inside source code of your own program. If do so,
 <hr />
 
 ### Citation
-     """Bonnici, V., Giugno, R., Pulvirenti, A., Shasha, D., & Ferro, A. (2013).
+     Bonnici, V., Giugno, R., Pulvirenti, A., Shasha, D., & Ferro, A. (2013).
      A subgraph isomorphism algorithm and its application to biochemical data. 
      BMC bioinformatics, 14(7), S13.
 
