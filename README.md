@@ -123,6 +123,7 @@ Br <br>
 ### License
 RI is distributed under the MIT license. This means that it is free for both academic and commercial use. Note however that some third party components in RI require that you reference certain works in scientific publications.
 You are free to link or use RI inside source code of your own program. If do so, please reference (cite) RI and this website. We appreciate bug fixes and would be happy to collaborate for improvements. 
+[License](https://raw.githubusercontent.com/GiugnoLab/RI/master/LICENSE)
 
 <hr />
 
