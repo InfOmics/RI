@@ -120,6 +120,13 @@ Br <br>
 
 <hr />
 
+### Datasets
+A biochemical dataset originally used to evaluate the performance of RI and RI-DS is availiabe at this [repository](https://github.com/GiugnoLab/RI-Datasets).
+
+A further syntetic dataset used to evaluate RI and RI-DS in 2018 is available at the following [repository](https://github.com/GiugnoLab/RI-synthds).
+
+<hr />
+
 ### License
 RI is distributed under the MIT license. This means that it is free for both academic and commercial use. Note however that some third party components in RI require that you reference certain works in scientific publications.
 You are free to link or use RI inside source code of your own program. If do so, please reference (cite) RI and this website. We appreciate bug fixes and would be happy to collaborate for improvements. 
