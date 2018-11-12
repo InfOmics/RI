@@ -43,6 +43,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "MatchingMachine.h"
 #include "MaMaConstrFirst.h"
 #include "Match.h"
+
+//#define FIRST_MATCH_ONLY  //if setted, the searching process stops at the first found match
 #include "Solver.h"
 #include "IsoGISolver.h"
 #include "SubGISolver.h"
