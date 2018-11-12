@@ -153,6 +153,9 @@ public:
 
 				if(si == nof_sn -1){
 					matchListener.match(nof_sn, map_state_to_node, solution);
+#ifdef FIRST_MATCH_ONLY
+					si = -1;
+#endif
 					psi = si;
 				}
 				else{
