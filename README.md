@@ -10,7 +10,7 @@
 
 ***RI*** aims to provide a better search strategy for the common used backtracking approach to the subgraph isomorphism problem. It can be integrated with additional preprocessing steps or it can be used for the verification of candidate structures coming from data mining, data indexing or other filtering techniques. RI is able to find graphs isomorphisms, subgraph isomorphisms and induced subgraph isomorphisms. It is distributed in several versions divide chiefly in two groups respectively for static or dynamically changing attributes. All proposed versions are developed taking into account trade-offs between time and memory requirements. Optional behaviors such as stop at first encountered match, processing of result matches, type of isomorphism and additional features may be enabled thanks to high modularity and library's API.
 
-The ***RI*** project also aims to provide a comparison of existing exact subgraph matching algorithms on synthetic and real life graphs. An initial collection of datasets is proposed, it includes synthetic and biological graphs but further types of data regarding other research areas (i.e. engineering, computer vision, etc...) are coming. A list of proposed application is also given.
+The ***RI*** project also aims to provide a comparison of existing exact subgraph matching algorithms on synthetic and real life graphs. An initial collection of datasets is proposed, it includes synthetic and biological graphs but further types of data regarding other research areas (i.e. engineering, computer vision, etc...) are coming. A list of proposed applications is also given.
 
 Please send us an email to get software sources or datasets (see Contacts).
 
@@ -18,7 +18,7 @@ Please send us an email to get software sources or datasets (see Contacts).
 
 ### Usage
 ##### RI - CLI (Command Line Interface)
-Before usinf the RI command line interface of all distributions, please rebuilt it by make -B
+Before using the RI command line interface of all distributions, please rebuilt it by make -B
 All versions of RI take in input the same parameters:
 ```
  ./ri ISO_TYPE INPUT_FORMAT target_graph pattern_graph    
@@ -39,7 +39,7 @@ All versions of RI take in input the same parameters:
 
 ##### Query extractor
 
-Before using the query extractor tool please rebuilt it by make -B querygen
+Before using the query extractor tool please rebuilt it by digiting `make -B querygen`, then the usage of the built executable is the following:
 ```
 ./querygen [gfu gfd] input_graph number_of_nodes number_of_edges output_file number_of_queries
 ```
