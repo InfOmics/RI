@@ -33,8 +33,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef ATTRIBUTECOMPARATOR_H_
 #define ATTRIBUTECOMPARATOR_H_
 
-#include <string>
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -64,14 +62,14 @@ class StringAttrComparator: public AttributeComparator{
 public:
 	StringAttrComparator(){};
 	virtual bool compare(void* attr1, void* attr2){
-		std::string* a=(std::string*)attr1;
-		std::string* b=(std::string*)attr2;
-		return (a->compare(*b))==0;
+		char* a=(char*)attr1;
+		char* b=(char*)attr2;
+		return (strcmp(a, b))==0;
 	};
 	virtual int compareint(void* attr1, void* attr2){
-		std::string* a=(std::string*)attr1;
-		std::string* b=(std::string*)attr2;
-		return a->compare(*b);
+		char* a=(char*)attr1;
+		char* b=(char*)attr2;
+		return strcmp(a, b);
 	};
 };
 

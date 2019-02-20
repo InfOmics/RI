@@ -75,13 +75,13 @@ public:
 	void solve(){
 		int ii;
 
-		int nof_sn 						= mama.nof_sn;
-		void** nodes_attrs 				= mama.nodes_attrs;				//indexed by state_id
-		int* edges_sizes 				= mama.edges_sizes;				//indexed by state_id
-		MaMaEdge** edges 				= mama.edges;					//indexed by state_id
-		int* map_node_to_state 			= mama.map_node_to_state;			//indexed by node_id
-		int* map_state_to_node 			= mama.map_state_to_node;			//indexed by state_id
-		int* parent_state 				= mama.parent_state;			//indexed by state_id
+		int nof_sn 						        = mama.nof_sn;
+		void** nodes_attrs 				    = mama.nodes_attrs;				//indexed by state_id
+		int* edges_sizes 				      = mama.edges_sizes;				//indexed by state_id
+		MaMaEdge** edges 				      = mama.edges;					//indexed by state_id
+		int* map_node_to_state 			  = mama.map_node_to_state;			//indexed by node_id
+		int* map_state_to_node 			  = mama.map_state_to_node;			//indexed by state_id
+		int* parent_state 				    = mama.parent_state;			//indexed by state_id
 		MAMA_PARENTTYPE* parent_type 	= mama.parent_type;				//indexed by state id
 
 
@@ -182,6 +182,15 @@ public:
 				}
 			}
 		}
+    
+    // memory cleanup
+    free(matched);
+    delete[] cmatched;
+    delete[] solution;
+    delete[] candidatesSize;
+    delete[] candidatesIT;
+    delete[] candidates;
+    delete[] listAllRef;
 	}
 
 
