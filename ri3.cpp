@@ -155,23 +155,17 @@ int match(
 
 	AttributeComparator* nodeComparator;			//to compare node labels
 	AttributeComparator* edgeComparator;			//to compare edge labels
-	AttributeDeconstructor* nodeAttrDeco;			//to free node labels
-	AttributeDeconstructor* edgeAttrDeco;			//to free edge labels
 	switch(filetype){
 		case GFT_GFU:
 		case GFT_GFD:
 			// only nodes have labels and they are strings
 			nodeComparator = new StringAttrComparator();
 			edgeComparator = new DefaultAttrComparator();
-			nodeAttrDeco = new StringAttrDeCo();
-			edgeAttrDeco = new VoidAttrDeCo();
 			takeNodeLabels = true;
 			break;
 		case GFT_GFDA:
 			nodeComparator = new DefaultAttrComparator();
 			edgeComparator = new DefaultAttrComparator();
-			nodeAttrDeco = new StringAttrDeCo();
-			edgeAttrDeco = new VoidAttrDeCo();
 			takeNodeLabels = true;
 			break;
 		case GFT_EGFU:
@@ -179,8 +173,6 @@ int match(
 			//labels on nodes and edges, both of them are strings
 			nodeComparator = new StringAttrComparator();
 			edgeComparator = new StringAttrComparator();
-			nodeAttrDeco = new StringAttrDeCo();
-			edgeAttrDeco = new StringAttrDeCo();
 			takeNodeLabels = true;
 			takeEdgesLabels = true;
 			break;
@@ -188,9 +180,9 @@ int match(
 			//no labels
 			nodeComparator = new DefaultAttrComparator();
 			edgeComparator = new DefaultAttrComparator();
-			nodeAttrDeco = new VoidAttrDeCo();
-			edgeAttrDeco = new VoidAttrDeCo();
 			break;
+    default:
+      return -1;
 	}
 
 	TIMEHANDLE tt_start;
@@ -263,8 +255,8 @@ int match(
 					matchedcouples += tmatchedcouples;
 
 				}
-//				delete rrg;
-				//remember that destroyer are not defined
+        delete rrg;
+				
 			i++;
 		}while(rreaded);
 
@@ -296,9 +288,12 @@ int match(
 //	delete mama;
 //	delete query;
 
-	delete nodeComparator;
-	delete edgeComparator;
-
+  delete mama;
+  delete query;
+  
+  delete nodeComparator;
+  delete edgeComparator;
+  
 	return 0;
 };
 

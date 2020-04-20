@@ -56,6 +56,24 @@ public:
 		in_adj_list = NULL;
 		out_adj_attrs = NULL;
 	}
+  
+  ~Graph() {
+    int i, j;
+    
+    for (i=0; i<nof_nodes; ++i) {
+      for (j=0; j<out_adj_sizes[i]; ++j) free(out_adj_attrs[i][j]);
+      free(out_adj_attrs[i]);
+      free(in_adj_list[i]);
+      free(out_adj_list[i]);
+      free(nodes_attrs[i]);
+    }
+    free(out_adj_attrs);
+    free(in_adj_list);
+    free(out_adj_list);
+    free(in_adj_sizes);
+    free(out_adj_sizes);
+    free(nodes_attrs);
+  }
 
 
 //	void sort_edges(){

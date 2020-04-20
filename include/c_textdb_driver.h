@@ -33,7 +33,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef C_TEXTDB_DRIVER_H_
 #define C_TEXTDB_DRIVER_H_
 
-#include <string>
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -97,6 +96,8 @@ int read_dbgraph(const char* filename, FILE* fd, Graph* g, enum GRAPH_FILE_TYPE 
 	case GFT_LAD:
 		ret = read_lad(filename, fd, g);
 		break;
+  default:
+      ret = -1;
 	}
 
 	return ret;
@@ -129,6 +130,8 @@ int read_graph(const char* filename, Graph* g, enum GRAPH_FILE_TYPE type){
 	case GFT_LAD:
 		ret = read_lad(filename, fd, g);
 		break;
+  default:
+      ret = -1;
 	}
 
 	fclose(fd);
@@ -169,7 +172,8 @@ int read_gfu(const char* fileName, FILE* fd, Graph* graph){
 		if (fscanf(fd,"%s",label) != 1){
 			return -1;
 		}
-		graph->nodes_attrs[i] = new std::string(label);
+		graph->nodes_attrs[i] = (char*)malloc((strlen(label) + 1) * sizeof(char));
+    strcpy((char*)graph->nodes_attrs[i], label);
 	}
 
 	//edges
@@ -290,7 +294,10 @@ int read_gfu(const char* fileName, FILE* fd, Graph* graph){
 //			free(ns_o);
 //			free(ns_i);
 	}
-
+  free(ns_o);
+  free(ns_i);
+  free(ink);
+  delete[] label;
 	return 0;
 };
 
@@ -314,7 +321,8 @@ int read_gfd(const char* fileName, FILE* fd, Graph* graph){
 		if (fscanf(fd,"%s",label) != 1){
 			return -1;
 		}
-		graph->nodes_attrs[i] = new std::string(label);
+    graph->nodes_attrs[i] = (char*)malloc((strlen(label) + 1) * sizeof(char));
+    strcpy((char*)graph->nodes_attrs[i], label);
 	}
 
 	//edges
@@ -322,10 +330,8 @@ int read_gfd(const char* fileName, FILE* fd, Graph* graph){
 	graph->in_adj_sizes = (int*)calloc(graph->nof_nodes, sizeof(int));
 
 	gr_neighs_t **ns_o = (gr_neighs_t**)malloc(graph->nof_nodes * sizeof(gr_neighs_t));
-	gr_neighs_t **ns_i = (gr_neighs_t**)malloc(graph->nof_nodes * sizeof(gr_neighs_t));
 	for(i=0; i<graph->nof_nodes; i++){
 		ns_o[i] = NULL;
-		ns_i[i] = NULL;
 	}
 	int temp = 0;
 	if (fscanf(fd,"%d",&temp) != 1){//number of edges
@@ -380,6 +386,23 @@ int read_gfd(const char* fileName, FILE* fd, Graph* graph){
 	}
 
 //	graph->sort_edges();
+  free(ink);
+  
+  for(int i=0; i<graph->nof_nodes; i++){
+    if(ns_o[i] != NULL){
+      gr_neighs_t *p = NULL;
+      gr_neighs_t *n = ns_o[i];
+      for (j=0; j<graph->out_adj_sizes[i]; j++){
+        free(p);
+        p = n;
+        n = n->next;
+      }
+      free(p);
+    }
+  }
+  free(ns_o);
+  
+  delete[] label;
 
 	return 0;
 };
@@ -434,7 +457,7 @@ struct egr_neighs_t{
 public:
 	int nid;
 	egr_neighs_t *next;
-	std::string* label;
+	char* label;
 };
 
 
@@ -459,7 +482,8 @@ int read_egfu(const char* fileName, FILE* fd, Graph* graph){
 		if (fscanf(fd,"%s",label) != 1){
 			return -1;
 		}
-		graph->nodes_attrs[i] = new std::string(label);
+    graph->nodes_attrs[i] = (char*)malloc((strlen(label) + 1) * sizeof(char));
+    strcpy((char*)graph->nodes_attrs[i], label);
 	}
 
 	//edges
@@ -467,10 +491,10 @@ int read_egfu(const char* fileName, FILE* fd, Graph* graph){
 	graph->in_adj_sizes = (int*)calloc(graph->nof_nodes, sizeof(int));
 
 	egr_neighs_t **ns_o = (egr_neighs_t**)malloc(graph->nof_nodes * sizeof(egr_neighs_t));
-	egr_neighs_t **ns_i = (egr_neighs_t**)malloc(graph->nof_nodes * sizeof(egr_neighs_t));
+  egr_neighs_t **ns_i = (egr_neighs_t**)malloc(graph->nof_nodes * sizeof(egr_neighs_t));
 	for(i=0; i<graph->nof_nodes; i++){
 		ns_o[i] = NULL;
-		ns_i[i] = NULL;
+    ns_i[i] = NULL;
 	}
 	int temp = 0;
 	if (fscanf(fd,"%d",&temp) != 1){//number of edges
@@ -496,13 +520,15 @@ int read_egfu(const char* fileName, FILE* fd, Graph* graph){
 			ns_o[es] = (egr_neighs_t*)malloc(sizeof(egr_neighs_t));
 			ns_o[es]->nid = et;
 			ns_o[es]->next = NULL;
-			ns_o[es]->label = new std::string(label);
+			ns_o[es]->label = (char*)malloc((strlen(label) + 1) * sizeof(char));
+      strcpy(ns_o[es]->label, label);
 		}
 		else{
 			egr_neighs_t* n = (egr_neighs_t*)malloc(sizeof(egr_neighs_t));
 			n->nid = et;
 			n->next = (struct egr_neighs_t*)ns_o[es];
-			n->label = new std::string(label);
+      n->label = (char*)malloc((strlen(label) + 1) * sizeof(char));
+      strcpy(n->label, label);
 			ns_o[es] = n;
 		}
 
@@ -513,13 +539,15 @@ int read_egfu(const char* fileName, FILE* fd, Graph* graph){
 			ns_o[et] = (egr_neighs_t*)malloc(sizeof(egr_neighs_t));
 			ns_o[et]->nid = es;
 			ns_o[et]->next = NULL;
-			ns_o[et]->label = new std::string(label);
+      ns_o[et]->label = (char*)malloc((strlen(label) + 1) * sizeof(char));
+      strcpy((char*)ns_o[et]->label, label);
 		}
 		else{
 			egr_neighs_t* n = (egr_neighs_t*)malloc(sizeof(egr_neighs_t));
 			n->nid = es;
 			n->next = (struct egr_neighs_t*)ns_o[et];
-			n->label = new std::string(label);
+      n->label = (char*)malloc((strlen(label) + 1) * sizeof(char));
+      strcpy((char*)n->label, label);
 			ns_o[et] = n;
 		}
 
@@ -588,13 +616,17 @@ int read_egfu(const char* fileName, FILE* fd, Graph* graph){
 //			free(ns_o);
 //			free(ns_i);
 	}
-
+  
+  free(ns_o);
+  free(ns_i);
+  free(ink);
+  delete[] label;
 	return 0;
 };
 
 
 int read_egfd(const char* fileName, FILE* fd, Graph* graph){
-	char str[STR_READ_LENGTH];
+  char str[STR_READ_LENGTH];
 	int i,j;
 
 	if (fscanf(fd,"%s",str) != 1){	//#graphname
@@ -610,7 +642,8 @@ int read_egfd(const char* fileName, FILE* fd, Graph* graph){
 		if (fscanf(fd,"%s",label) != 1){
 			return -1;
 		}
-		graph->nodes_attrs[i] = new std::string(label);
+    graph->nodes_attrs[i] = (char*)malloc((strlen(label) + 1) * sizeof(char));
+    strcpy((char*)graph->nodes_attrs[i], label);
 	}
 
 	//edges
@@ -618,10 +651,8 @@ int read_egfd(const char* fileName, FILE* fd, Graph* graph){
 	graph->in_adj_sizes = (int*)calloc(graph->nof_nodes, sizeof(int));
 
 	egr_neighs_t **ns_o = (egr_neighs_t**)malloc(graph->nof_nodes * sizeof(egr_neighs_t));
-	egr_neighs_t **ns_i = (egr_neighs_t**)malloc(graph->nof_nodes * sizeof(egr_neighs_t));
 	for(i=0; i<graph->nof_nodes; i++){
 		ns_o[i] = NULL;
-		ns_i[i] = NULL;
 	}
 	int temp = 0;
 	if (fscanf(fd,"%d",&temp) != 1){//number of edges
@@ -646,13 +677,15 @@ int read_egfd(const char* fileName, FILE* fd, Graph* graph){
 			ns_o[es] = (egr_neighs_t*)malloc(sizeof(egr_neighs_t));
 			ns_o[es]->nid = et;
 			ns_o[es]->next = NULL;
-			ns_o[es]->label = new std::string(label);
+      ns_o[es]->label = (char*)malloc((strlen(label) + 1) * sizeof(char));
+      strcpy(ns_o[es]->label, label);
 		}
 		else{
 			egr_neighs_t* n = (egr_neighs_t*)malloc(sizeof(egr_neighs_t));
 			n->nid = et;
 			n->next = (struct egr_neighs_t*)ns_o[es];
-			n->label = new std::string(label);
+      n->label = (char*)malloc((strlen(label) + 1) * sizeof(char));
+      strcpy(n->label, label);
 			ns_o[es] = n;
 		}
 
@@ -687,7 +720,22 @@ int read_egfd(const char* fileName, FILE* fd, Graph* graph){
 	}
 
 //	graph->sort_edges();
-
+  for(int i=0; i<graph->nof_nodes; i++){
+    if(ns_o[i] != NULL){
+      egr_neighs_t *p = NULL;
+      egr_neighs_t *n = ns_o[i];
+      for (j=0; j<graph->out_adj_sizes[i]; j++){
+        free(p);
+        p = n;
+        n = n->next;
+      }
+      free(p);
+    }
+  }
+  free(ns_o);
+  free(ink);
+  delete[] label;
+  
 	return 0;
 };
 
