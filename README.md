@@ -139,6 +139,9 @@ You are free to link or use RI inside source code of your own program. If do so,
      A subgraph isomorphism algorithm and its application to biochemical data. 
      BMC bioinformatics, 14(7), S13.
 
+     Bonnici V, Giugno R. 
+     On the variable ordering in subgraph isomorphism algorithms. 
+     IEEE/ACM transactions on computational biology and bioinformatics. 2016 Jan 7;14(1):193-203.
 <hr />
 
 ### References
