@@ -37,6 +37,7 @@ All versions of RI take in input the same parameters:
 |geu	|undirected graphs with attributes both on nodes and edges.|
 |vfu	|Sansone et al. file format for labeled directed graphs with attributes only on nodes.|
 
+<!--
 ##### Query extractor
 
 Before using the query extractor tool please rebuilt it by digiting `make -B querygen`, then the usage of the built executable is the following:
@@ -67,6 +68,8 @@ The tool usage is:
 |gfd	|directed graphs with attributes only on nodes.|
 |gfu	|undirected graphs with attributes only on nodes.|
 |vfu| Sansone et al. file format for labeled directed graphs with attributes only on nodes.|
+
+-->
 
 ##### Default graph file format
 
