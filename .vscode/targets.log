@@ -1,4 +1,0 @@
-make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
-"make.exe" non � riconosciuto come comando interno o esterno,
- un programma eseguibile o un file batch.
-
