@@ -41,7 +41,7 @@ jobs:
     - name: Build artifacts
       run: make
     - name: list files
-      run: ls -la
+      run: pwd
   
   upload:
     runs-on: ubuntu-latest
