@@ -1,3 +1,8 @@
+![](https://img.shields.io/badge/C++-RI-blue.svg?style=flat&logo=c%2B%2B)
+![](https://img.shields.io/github/stars/InfOmics/RI)
+![](https://img.shields.io/github/forks/InfOmics/RI)
+![](https://img.shields.io/github/workflow/status/classy-giraffe/RI/CI)
+
 # RI
 ***Version: 3.6***
 > RI is a general purpose algorithm for one-to-one exact subgraph isomorphism problem maintaining topological constraints. 
