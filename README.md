@@ -10,10 +10,9 @@
 <hr />
 
 ### Description
-***RI*** is a general purpose algorithm for one-to-one exact subgraph isomorphism problem maintaining topological constraints. It is both a C++ library and a standalone tool, providing developing API and a command line interface, with no dependencies out of standard GNU C++ library. RI works on Unix and Mac OS X systems with G++ installed, and it can be compiled under Windows using Gygwin. Working graphs may be directed, undirected, multigraphs with optional attributes both on nodes and edges. Customizable features allow user-defined behaviors for attribute comparisons and the algorithm's flow.
+***RI*** is a general purpose algorithm for one-to-one exact subgraph isomorphism problem maintaining topological constraints. It is both a C++ library and a standalone tool, providing developing API and a command line interface, with no dependencies out of standard GNU C++ library. ***RI*** works on Unix and Mac OS X systems with G++ installed, and it can be compiled under Windows using Gygwin. Working graphs may be directed, undirected, multigraphs with optional attributes both on nodes and edges. Customizable features allow user-defined behaviors for attribute comparisons and the algorithm's flow.
 
-
-***RI*** aims to provide a better search strategy for the common used backtracking approach to the subgraph isomorphism problem. It can be integrated with additional preprocessing steps or it can be used for the verification of candidate structures coming from data mining, data indexing or other filtering techniques. RI is able to find graphs isomorphisms, subgraph isomorphisms and induced subgraph isomorphisms. It is distributed in several versions divide chiefly in two groups respectively for static or dynamically changing attributes. All proposed versions are developed taking into account trade-offs between time and memory requirements. Optional behaviors such as stop at first encountered match, processing of result matches, type of isomorphism and additional features may be enabled thanks to high modularity and library's API.
+***RI*** aims to provide a better search strategy for the common used backtracking approach to the subgraph isomorphism problem. It can be integrated with additional preprocessing steps or it can be used for the verification of candidate structures coming from data mining, data indexing or other filtering techniques. ***RI*** is able to find graphs isomorphisms, subgraph isomorphisms and induced subgraph isomorphisms. It is distributed in several versions divide chiefly in two groups respectively for static or dynamically changing attributes. All proposed versions are developed taking into account trade-offs between time and memory requirements. Optional behaviors such as stop at first encountered match, processing of result matches, type of isomorphism and additional features may be enabled thanks to high modularity and library's API.
 
 The ***RI*** project also aims to provide a comparison of existing exact subgraph matching algorithms on synthetic and real life graphs. An initial collection of datasets is proposed, it includes synthetic and biological graphs but further types of data regarding other research areas (i.e. engineering, computer vision, etc...) are coming. A list of proposed applications is also given.
 
@@ -23,10 +22,15 @@ Please send us an email to get software sources or datasets (see Contacts).
 
 ### Usage
 ##### RI - CLI (Command Line Interface)
-Before using the RI command line interface of all distributions, please rebuilt it by make -B
-All versions of RI take in input the same parameters:
+In order to use RI you must grab an artifact produced by the CI (check the actions tab on GitHub) or manually compile it from scratch.
+On Debian-based distributions (Debian, Ubuntu, PopOS etc...):
+1. Clone the repository
+2. Install the dependencies (G++ and make)
+```sudo apt install g++ make```
+3. Compile it (you might need to switch to the repository directory by using `cd`)
+```make```
 ```
- ./ri ISO_TYPE INPUT_FORMAT target_graph pattern_graph    
+ ./ri <ISO_TYPE> <INPUT_FORMAT> <target_graph> <pattern_graph>    
 ```
 |ISO_TYPE|specify isomorphism|
 |---------|-------------------|
@@ -41,40 +45,6 @@ All versions of RI take in input the same parameters:
 |ged	|directed graphs with attributes both on nodes and edges.|
 |geu	|undirected graphs with attributes both on nodes and edges.|
 |vfu	|Sansone et al. file format for labeled directed graphs with attributes only on nodes.|
-
-<!--
-##### Query extractor
-
-Before using the query extractor tool please rebuilt it by digiting `make -B querygen`, then the usage of the built executable is the following:
-```
-./querygen [gfu gfd] input_graph number_of_nodes number_of_edges output_file number_of_queries
-```
-The query extractor tries to extract a total amount of number_of_queries subgraphs, from the given input_graph, with the specified number_of_nodes and number_of_edges, saving them at the specified output prefix output_file.
-
-You can set the number_of_nodes or number_of_edges to -1 to do not specify them. For example, let the number_of_edges fixed to a value and the number_of_nodes set to the -1, than the extractor tries to extract a subgraph just with the given number of edges not caring the number of nodes. You can also set number_of_nodes to a decimal value between 0 and 1 to specify it as a percentage of the number_of_edges.
-
-Note that if the input parameters do not reflect the properties of the input_graph you can obtain an unwanted resulting subgraph. So, the extractor tries first to generate a graph with the specified number of edges and the maximum possible number of nodes near to the input value. This does not exclude that a subgraph with the specified number of edges will be extracted.
-
-
-##### FocusSearch-C++
-Before use the FocusSearch-C++ command line interface of all distributions, please rebuilt it by make -B
-The tool usage is:
-
-```
-./fsearch ISO_TYPE INPUT_FORMAT target_graph pattern_graph
-```
-
-|ISO_TYPE|specify isomorphism|
-|---------------|------------|
-|mono|monomorphism, the classical subgraph matching|
-
-|INPUT_FORMAT|	specify input file format|
-|---------------|------------|
-|gfd	|directed graphs with attributes only on nodes.|
-|gfu	|undirected graphs with attributes only on nodes.|
-|vfu| Sansone et al. file format for labeled directed graphs with attributes only on nodes.|
-
--->
 
 ##### Default graph file format
 
@@ -140,19 +110,19 @@ RI is distributed under the MIT license. This means that it is free for both aca
 You are free to link or use RI inside source code of your own program. If do so, please reference (cite) RI and this website. We appreciate bug fixes and would be happy to collaborate for improvements. 
 [License](https://raw.githubusercontent.com/GiugnoLab/RI/master/LICENSE)
 
-<hr />
 
 ### Citation
-     Bonnici, V., Giugno, R., Pulvirenti, A., Shasha, D., & Ferro, A. (2013).
-     A subgraph isomorphism algorithm and its application to biochemical data. 
-     BMC bioinformatics, 14(7), S13.
+```
+Bonnici, V., Giugno, R., Pulvirenti, A., Shasha, D., & Ferro, A. (2013).
+A subgraph isomorphism algorithm and its application to biochemical data. 
+BMC bioinformatics, 14(7), S13.
 
-     Bonnici V, Giugno R. 
-     On the variable ordering in subgraph isomorphism algorithms. 
-     IEEE/ACM transactions on computational biology and bioinformatics. 2016 Jan 7;14(1):193-203.
-<hr />
+Bonnici V, Giugno R. 
+On the variable ordering in subgraph isomorphism algorithms. 
+IEEE/ACM transactions on computational biology and bioinformatics. 2016 Jan 7;14(1):193-203.
+```
 
 ### References
- if you have used any of the RI project software, please cite the following paper:
+If you have used any of the RI project software, please cite the following paper:
  
 Vincenzo Bonnici, Rosalba Giugno, Alfredo Pulvirenti, Dennis Shasha and Alfredo Ferro. A subgraph isomorphism algorithm and its application to biochemical data. BMC Bioinformatics 2013, 14(Suppl 7):S13 doi:10.1186/1471-2105-14-S7-S13.
