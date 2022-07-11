@@ -1,11 +1,10 @@
 INCLUDES= -I ./rilib/ -I ./include/
 CC=g++
-CFLAGS=-c -O3
+CFLAGS=-c -O3 -Ofast
 
 SOURCES= ri3.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=ri36
-
 
 all:	$(SOURCES) $(EXECUTABLE)
 
