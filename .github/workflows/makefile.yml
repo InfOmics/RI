@@ -43,4 +43,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: ri36
-        path: /home/runner/work/RI/RI/ri36
+        path: ri36
