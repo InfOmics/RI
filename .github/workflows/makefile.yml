@@ -20,4 +20,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: ri36
-        path: path/to/artifact/world.txt
+        path: ri36
